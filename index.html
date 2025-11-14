@@ -208,6 +208,237 @@
             box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
         }
 
+        /* AI Chat Widget */
+        .ai-chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1001;
+            font-family: 'Exo 2', sans-serif;
+        }
+
+        .chat-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255, 59, 48, 0.4);
+            transition: var(--transition);
+            border: none;
+        }
+
+        .chat-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(255, 59, 48, 0.6);
+        }
+
+        .chat-container {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: linear-gradient(145deg, var(--gray), var(--dark));
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            flex-direction: column;
+            border: 1px solid rgba(255, 59, 48, 0.3);
+            overflow: hidden;
+        }
+
+        .chat-container.active {
+            display: flex;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chat-header {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header h3 {
+            color: white;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-header h3 i {
+            font-size: 1.4rem;
+        }
+
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-chat:hover {
+            transform: scale(1.2);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 15px;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            position: relative;
+            animation: messageAppear 0.3s ease;
+        }
+
+        @keyframes messageAppear {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            border-bottom-left-radius: 5px;
+        }
+
+        .chat-input-container {
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            color: var(--text);
+            font-size: 0.9rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(255, 59, 48, 0.2);
+        }
+
+        .send-button {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .send-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(255, 59, 48, 0.4);
+        }
+
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 15px;
+            border-radius: 18px;
+            border-bottom-left-radius: 5px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .typing-indicator.active {
+            display: block;
+        }
+
+        .typing-dots {
+            display: inline-block;
+        }
+
+        .typing-dots span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-light);
+            margin: 0 2px;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dots span:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-5px);
+            }
+        }
+
         /* Hero Section */
         .hero {
             padding: 160px 0 100px;
@@ -964,7 +1195,7 @@
         /* Scroll to top button */
         .scroll-top {
             position: fixed;
-            bottom: 30px;
+            bottom: 100px;
             right: 30px;
             width: 50px;
             height: 50px;
@@ -1004,6 +1235,11 @@
 
             .discord-container {
                 flex-direction: column;
+            }
+
+            .chat-container {
+                width: 320px;
+                height: 450px;
             }
         }
 
@@ -1064,6 +1300,16 @@
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 40px;
+            }
+
+            .ai-chat-widget {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .chat-container {
+                width: 300px;
+                right: -10px;
             }
         }
 
@@ -1458,12 +1704,171 @@
         </div>
     </footer>
 
+    <!-- AI Chat Widget -->
+    <div class="ai-chat-widget">
+        <button class="chat-toggle">
+            <i class="fas fa-robot"></i>
+        </button>
+        <div class="chat-container">
+            <div class="chat-header">
+                <h3><i class="fas fa-robot"></i> Crimeson Assistant</h3>
+                <button class="close-chat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chat-messages">
+                <div class="message bot-message">
+                    Hello! I'm the Crimeson Assistant. How can I help you today?
+                </div>
+            </div>
+            <div class="typing-indicator">
+                <span class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+                Crimeson Assistant is typing...
+            </div>
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" placeholder="Type your message...">
+                <button class="send-button">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Scroll to top button -->
     <div class="scroll-top">
         <i class="fas fa-arrow-up"></i>
     </div>
 
     <script>
+        // AI Chat Functionality
+        const chatToggle = document.querySelector('.chat-toggle');
+        const chatContainer = document.querySelector('.chat-container');
+        const closeChat = document.querySelector('.close-chat');
+        const chatInput = document.querySelector('.chat-input');
+        const sendButton = document.querySelector('.send-button');
+        const chatMessages = document.querySelector('.chat-messages');
+        const typingIndicator = document.querySelector('.typing-indicator');
+
+        // Toggle chat window
+        chatToggle.addEventListener('click', () => {
+            chatContainer.classList.toggle('active');
+        });
+
+        // Close chat window
+        closeChat.addEventListener('click', () => {
+            chatContainer.classList.remove('active');
+        });
+
+        // AI responses database
+        const aiResponses = {
+            greetings: [
+                "Hello! How can I assist you today?",
+                "Hi there! What can I help you with?",
+                "Greetings! I'm here to help with any questions about Crimeson."
+            ],
+            roles: [
+                "We have three exclusive roles: Guardian ($4.99), Noble ($9.99), and Legend ($19.99). Each offers unique perks and benefits.",
+                "Our roles range from Guardian to Legend, with increasing benefits. Check out the Roles section for details!",
+                "We offer Guardian, Noble, and Legend roles with various perks like special Discord colors, VIP access, and more."
+            ],
+            donations: [
+                "We have several donation packages: Supporter ($2.99), Booster ($7.99), Premium ($14.99), and Ultimate ($29.99).",
+                "Our donation packages help support the community and come with special rewards. Check the Donations section!",
+                "You can choose from Supporter, Booster, Premium, or Ultimate donation packs, each with different benefits."
+            ],
+            discord: [
+                "Join our Discord at https://discord.gg/PTUS6TXTTj and complete verification to access exclusive content!",
+                "Our Discord community is where all the action happens! Join us at https://discord.gg/PTUS6TXTTj",
+                "Connect with our community on Discord! Use this link: https://discord.gg/PTUS6TXTTj"
+            ],
+            payment: [
+                "We accept credit cards, PayPal, Google Pay, Apple Pay, and cryptocurrency.",
+                "You can pay using various methods including credit cards, digital wallets, and even crypto!",
+                "We support all major payment options for your convenience."
+            ],
+            help: [
+                "I can help with information about roles, donations, Discord, payments, or general questions about Crimeson.",
+                "Feel free to ask me about our roles, donation packages, Discord community, or payment methods!",
+                "I'm here to answer questions about Crimeson. What would you like to know?"
+            ],
+            default: [
+                "I'm not sure I understand. Could you rephrase that?",
+                "I'm still learning! Try asking about roles, donations, or our Discord community.",
+                "I don't have an answer for that yet. Try asking about our services or community features."
+            ]
+        };
+
+        // Function to get AI response
+        function getAIResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+            
+            if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
+                return aiResponses.greetings[Math.floor(Math.random() * aiResponses.greetings.length)];
+            } else if (message.includes('role')) {
+                return aiResponses.roles[Math.floor(Math.random() * aiResponses.roles.length)];
+            } else if (message.includes('donat') || message.includes('support') || message.includes('pack')) {
+                return aiResponses.donations[Math.floor(Math.random() * aiResponses.donations.length)];
+            } else if (message.includes('discord') || message.includes('server') || message.includes('community')) {
+                return aiResponses.discord[Math.floor(Math.random() * aiResponses.discord.length)];
+            } else if (message.includes('pay') || message.includes('card') || message.includes('crypto')) {
+                return aiResponses.payment[Math.floor(Math.random() * aiResponses.payment.length)];
+            } else if (message.includes('help') || message.includes('what can you do')) {
+                return aiResponses.help[Math.floor(Math.random() * aiResponses.help.length)];
+            } else {
+                return aiResponses.default[Math.floor(Math.random() * aiResponses.default.length)];
+            }
+        }
+
+        // Function to add message to chat
+        function addMessage(message, isUser = false) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.classList.add(isUser ? 'user-message' : 'bot-message');
+            messageElement.textContent = message;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Function to simulate typing
+        function simulateTyping() {
+            typingIndicator.classList.add('active');
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    typingIndicator.classList.remove('active');
+                    resolve();
+                }, 1500);
+            });
+        }
+
+        // Handle sending messages
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (message === '') return;
+
+            // Add user message
+            addMessage(message, true);
+            chatInput.value = '';
+
+            // Simulate AI thinking
+            simulateTyping().then(() => {
+                // Add AI response
+                const response = getAIResponse(message);
+                addMessage(response);
+            });
+        }
+
+        // Event listeners for sending messages
+        sendButton.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
         // Auth Tabs Functionality
         const authTabs = document.querySelectorAll('.auth-tab');
         const authForms = document.querySelectorAll('.auth-form');
